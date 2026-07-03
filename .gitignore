@@ -1,0 +1,30 @@
+# ─── OS files ───────────────────────────────
+.DS_Store
+.AppleDouble
+._*
+Thumbs.db
+Desktop.ini
+ 
+# ─── Editors / IDEs ─────────────────────────
+.idea/
+*.iml
+.vscode/
+*.sublime-*
+*~
+ 
+# ─── Logs & temp ────────────────────────────
+*.log
+*.tmp
+*.bak
+ 
+# ─── Local DB dumps / backups (keep the real .sql, ignore throwaway exports) ───
+/backups/
+*.dump
+*.sql.bak
+ 
+# ─── Secrets & local config (NEVER commit credentials) ───
+.env
+*.env
+*.cnf
+config.local.*
+credentials*.txt
