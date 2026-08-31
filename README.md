@@ -15,11 +15,21 @@ This repository shows **the full lifecycle of the database** from the client's r
 > 
 > Each **product** is identified uniquely via a code, and has a name, brand, purchase price, store price and stock level.
 > 
-> **Suppliers are identified by their NIF (tax identification number) and have a record of their name, telephone number, email address and business address.
+> **Suppliers** are identified by their NIF (tax identification number) and have a record of their name, telephone number, email address and business address.
+> 
+> **Customers** can place **orders**, recorded with a date, total amount charged and VAT applied. Every order consists of one or more **product lines** that specify the quantity of each given product.
 
 ### Entity-Relationship Diagram
 
+`` Link or attached image``
+
 ### Relational model
+
+**Requirements Modification - Addition of Customer and Employee details**
+
+> Following the review of the proposed model, the client wants to include some extra information about the customers and employees.
+> 
+> Recording customer data opens the possibility of to send offers and personalized marketing to create brand loyalty.
 
 ## This database models
 
