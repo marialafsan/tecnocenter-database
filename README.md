@@ -47,11 +47,11 @@ This repository shows **the full lifecycle of the database** from the client's r
 |----------------|---------------------------------------------|-------------------------------------|
 | `producto`     | **Product**                         | `codigo`                         |
 | `proveedor`    | **Vendor**                                   | `nif`                             |
-| `suministro`   | **Supply** </br> Which vendor supplies which product </br>**(n : m)**   | `nif_proveedor` + `codigo_producto` |
+| `suministro`   | **Supply** </br> Which vendor supplies which product </br>**(N:M)**   | `nif_proveedor` + `codigo_producto` |
 | `empleado`     | **Employee**                                   | `id_empleado`                        |
 | `cliente`      | **Customer**                                   | `id_cliente`                        |
 | `pedido`       | **Order**                             | `id_pedido`                         |
-| `linea_pedido` | **Order Line** </br> **(n : m)** </br>order &harr; product        | `id_pedido` + `codigo_producto`     |
+| `linea_pedido` | **Order Line** </br> **(N:M)** </br>order &harr; product        | `id_pedido` + `codigo_producto`     |
 
 **Relationships:**
 - One `employer` manages many `orders` *(1:N)*
