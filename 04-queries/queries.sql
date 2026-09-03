@@ -58,21 +58,23 @@ UPDATE empleado SET puesto = 'Encargado' WHERE id_empleado = 3;
 --
 
 DROP TABLE IF EXISTS producto_oferta;
+
 CREATE TABLE producto_oferta (
-codigo INT(10) PRIMARY KEY,
-nombre VARCHAR(80),
-marca VARCHAR(50),
-precio_compra DECIMAL(8,2)
-CHECK (precio_compra > 0),
-precio_venta DECIMAL(8,2)
-CHECK (precio_venta > precio_compra),
-stock INT(11)
-CHECK (stock >= 0)
+    codigo INT(10) PRIMARY KEY,
+    nombre VARCHAR(80),
+    marca VARCHAR(50),
+    precio_compra DECIMAL(8,2)
+        CHECK (precio_compra > 0),
+    precio_venta DECIMAL(8,2)
+        CHECK (precio_venta > precio_compra),
+    stock INT(11)
+        CHECK (stock >= 0)
 );
+
 INSERT INTO producto_oferta (codigo, nombre, marca, 
 precio_compra, precio_venta, stock) 
-SELECT * FROM producto 
-WHERE precio_venta > 100;
+    SELECT * FROM producto 
+    WHERE precio_venta > 100;
 
 
 -------------------
@@ -101,6 +103,7 @@ direccion)
 VALUES 
 ('Enrique Trovador', 123456786, 
 'e.trova@email.com', 'Calle Trovador, 3');
+
 SET @id_cliente = LAST_INSERT_ID();
 
 --
@@ -110,6 +113,7 @@ INSERT INTO pedido (fecha, total, iva_aplicado,
 id_cliente, id_empleado)
 VALUES
 (CURDATE(),97.90,10.00,@id_cliente, 1);
+
 SET @id_pedido = LAST_INSERT_ID();
 
 --
@@ -126,16 +130,17 @@ VALUES
 UPDATE producto SET stock = stock-1 
 WHERE codigo = 8;--BLOQUE 5: Consulta inserciones
 SELECT 
-lp.id_pedido AS pedido,
-prod.nombre AS producto,
-prod.marca, 
-c.nombre AS comprador,
-prod.stock AS stock_restante
+    lp.id_pedido AS pedido,
+    prod.nombre AS producto,
+    prod.marca, 
+    c.nombre AS comprador,
+    prod.stock AS stock_restante
 FROM linea_pedido lp
 JOIN pedido p ON p.id_pedido = lp.id_pedido
 JOIN cliente c ON c.id_cliente = p.id_cliente
 JOIN producto prod ON prod.codigo = lp.codigo_producto;
 --
+----------------
 -- FIN SCRIPT --
 ----------------
 
@@ -218,6 +223,7 @@ START TRANSACTION;
     direccion)
     VALUES
     ('Prueba', 999999999, 'prueba@mail.com', 'prueba 0');
+    
     SET @id_cliente = LAST_INSERT_ID();
 
     SET @precio1 = (SELECT precio_venta FROM producto WHERE codigo = 1);
