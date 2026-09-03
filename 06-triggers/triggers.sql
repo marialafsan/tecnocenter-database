@@ -44,70 +44,26 @@ SELECT nombre, marca, stock FROM producto WHERE codigo = 1;
 
 COMMIT;
 
+---------------
+-- EVENTS --
+---------------
+--
+-- 1. Create an event that corrects the negative stock level to 0 each day
+--
 
-----------------
--- PROCEDURES --
-----------------
---
--- 1. Create a procedure that displays products with a stock level under 10 units
---
+SET GLOBAL event_scheduler = ON;
+
+DROP EVENT IF EXISTS corregir_stock_negativo;
 
 DELIMITER $$
 
-CREATE PROCEDURE prod_stock_bajo ()
+CREATE EVENT corregir_stock_negativo
+ON SCHEDULE EVERY 1 DAY
+DO
 BEGIN
-    SELECT * FROM producto WHERE stock <= 10;
-END$$
-
-DELIMITER;
-
--- To execute the procedure:
-
-CALL prod_stock_bajo();
-
-
---
--- 2. Procedure that displays products by brand name
---
-
-DELIMITER $$
-
-CREATE PROCEDURE productos_de_marca_x (IN marca_x VARCHAR(50))
-BEGIN
-    SELECT * FROM producto
-    WHERE marca = marca_x;
+    UPDATE producto
+    SET stock = 0
+    WHERE stock < 0;
 END$$
 
 DELIMITER ;
-
--- To execute the procedure:
-
-CALL productos_de_marca_x('Logitech');
-
-
---
--- 3. Flow Control. Design a procedure that receives a product's reference number and displays if there's stock. Use a conditional sentence
---
-
-DELIMITER $$
-
-CREATE PROCEDURE hay_stock (IN codigo_prod_x INT)
-BEGIN
-   DECLARE stock_prod_x INT;
-   
-   SELECT stock INTO stock_prod_x
-   FROM producto
-   WHERE codigo = codigo_prod_x;
-
-   IF stock_prod_x > 0 THEN
-      SELECT 'Hay stock';
-   ELSE
-      SELECT 'Sin stock';
-   END IF;
-END$$
-
-DELIMITER ;
-
--- To execute the procedure:
-
-CALL hay_stock ();
